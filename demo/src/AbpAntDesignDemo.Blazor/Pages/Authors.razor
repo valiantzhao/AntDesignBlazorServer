@@ -1,0 +1,62 @@
+﻿@page "/authors"
+@using AbpAntDesignDemo.Authors
+@using AbpAntDesignDemo.Localization
+@using Volo.Abp.AspNetCore.Components.Web
+@inherits AbpAntDesignDemoComponentBase
+@inject IAuthorAppService AuthorAppService
+@inject AbpBlazorMessageLocalizerHelper<AbpAntDesignDemoResource> LH
+<style>
+    .btnStyle {
+        background-color: #0a77e0;
+        color: #FFFFFF;
+    }
+</style>
+<div>
+    <Row Gutter="16">
+        <AntDesign.Col Class="gutter-row" Span="24">
+            <div style="margin-left: 10px;background-color: white">
+                <Row Style="padding:5px">
+                    <AntDesign.Col>
+                        <Space>
+                            <SpaceItem>
+                                <Input style="width:250px;" Placeholder="名称" @bind-Value="@txtValue" />
+                            </SpaceItem>
+                            <SpaceItem>
+                                <Button style="background-color:#0a77e0;color:#FFFFFF" @onclick="OnDataSearch">查询</Button>
+                            </SpaceItem>
+                            @*<SpaceItem>
+                                    <Button style="background-color:#941570;color:#FFFFFF">搜索设备</Button>
+                                </SpaceItem>*@
+                        </Space>
+                    </AntDesign.Col>
+                </Row>
+                <Row Style="padding:5px">
+                    <AntDesign.Col>
+                        <Space>
+                            <SpaceItem><Button Class="btnStyle" @onclick="OnAddAuthor">新增作者</Button></SpaceItem>
+                        </Space>
+                    </AntDesign.Col>
+                </Row>
+                <Row Style="padding:5px">
+                    <Col>
+                    <Table @ref="table"
+                           TItem="AuthorDto"
+                           DataSource="@datas"
+                           Total="_total"
+                           @bind-PageIndex="_pageIndex"
+                           @bind-PageSize="_pageSize"
+                           @bind-SelectedRows="selectedRows"
+                           ScrollX="2000"
+                           OnChange="OnChange">
+                        <Selection Key="@(context.Id.ToString())" Width="30" />
+                        @*<AntDesign.Column Title="操作" @bind-Field="@context.Action" />*@
+                        <AntDesign.Column Title="名称" @bind-Field="@context.Name" Sortable  ShowSorterTooltip="false" />
+                        <AntDesign.Column Title="BirthDate" Field="@context.BirthDate"  />
+                        <AntDesign.Column Title="ShortBio" Field="@context.ShortBio" />
+                    </Table>
+                    </Col>
+                </Row>
+            </div>
+        </AntDesign.Col>
+    </Row>
+</div>

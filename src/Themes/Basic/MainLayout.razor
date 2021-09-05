@@ -1,0 +1,26 @@
+﻿@namespace AbpAntDesignBlazorServer
+@using AntDesign.ProLayout
+@using Volo.Abp.UI.Navigation;
+@using Microsoft.Extensions.Options
+@using AbpAntDesignBlazorServer
+@using AbpAntDesignBlazorServer.Setting
+
+@inherits LayoutComponentBase
+@inject IOptions<ProSettings> SettingState
+@inject IOptions<AntDesignSettings> TFSettingState
+<AntDesign.ProLayout.BasicLayout Logo="SettingState.Value.IconfontUrl"
+                                    MenuData="_menuData" ContentStyle="margin:10px">
+    <RightContentRender>
+        <RightContent />
+    </RightContentRender>
+    <ChildContent>
+        @Body
+    </ChildContent>
+    @*<FooterRender>
+        <div class="ant-pro-global-footer">
+            <div class="ant-pro-global-footer-copyright">
+                Copyright <AntDesign.Icon Type="copyright" /><a href="@TFSettingState.Value.CopyrightUrl"> @TFSettingState.Value.Copyright</a>
+            </div>
+        </div>
+    </FooterRender>*@
+</AntDesign.ProLayout.BasicLayout>
